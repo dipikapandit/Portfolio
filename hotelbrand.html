@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hotel Brand Visuals — Dipika</title>
+
+  <!-- Main Styles (same as homepage) -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Google Font (same family as index) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Page-specific styles (move this into styles.css later) -->
+  <style>
+    .project-hero {
+      padding: 100px 64px 60px;
+      max-width: 1100px;
+    }
+
+    .project-hero h1 {
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .project-meta {
+      display: flex;
+      gap: 32px;
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 16px;
+    }
+
+    .project-section {
+      padding: 60px 64px;
+      max-width: 1100px;
+    }
+
+    .project-section h2 {
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+
+    .project-section p {
+      max-width: 700px;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .project-image {
+      margin: 40px 0;
+    }
+
+    .project-image img {
+      width: 100%;
+      border-radius: 16px;
+      background: #1a1a20;
+    }
+
+    .image-caption {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .project-grid img {
+      width: 100%;
+      border-radius: 14px;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 40px;
+      font-size: 14px;
+      color: var(--accent);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .project-hero,
+      .project-section {
+        padding: 60px 24px;
+      }
+
+      .project-hero h1 {
+        font-size: 36px;
+      }
+
+      .project-meta {
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header (same structure as index page) -->
+  <header>
+    <a href="index.html">
+    <div class="logo">Dipika</div>
+    </a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="index.html#work">Work</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Project Hero -->
+  <section class="project-hero">
+    <h1>Hotel Brand Visuals</h1>
+    <p class="muted">
+      Visual identity and Instagram creatives designed for a premium hospitality brand.
+    </p>
+
+    <div class="project-meta">
+      <div><strong>Role:</strong> Graphic & UI Designer</div>
+      <div><strong>Type:</strong> Branding, Social Media</div>
+      <div><strong>Year:</strong> 2025</div>
+    </div>
+  </section>
+
+  <!-- Overview -->
+  <section class="project-section">
+    <h2>Project Overview</h2>
+    <p>
+      The goal of this project was to create a cohesive and premium visual identity
+      for a hotel brand, primarily focused on Instagram content.
+      The designs needed to communicate luxury, warmth, and trust while maintaining
+      strong visual hierarchy for mobile audiences.
+    </p>
+  </section>
+
+  <!-- Visual Direction -->
+  <section class="project-section">
+    <h2>Visual Direction</h2>
+    <p>
+      The visual system uses warm tones, elegant typography, and minimal layouts.
+      Emphasis was placed on spacing, contrast, and consistency across all creatives.
+    </p>
+
+    <div class="project-image">
+      <img src="image1.png" alt="Hotel brand moodboard">
+      <div class="image-caption">Moodboard and visual direction</div>
+    </div>
+  </section>
+
+  <!-- Instagram Creatives -->
+  <section class="project-section">
+    <h2>Instagram Creatives</h2>
+    <p>
+      A flexible content system was designed to support promotions, announcements,
+      and brand storytelling while keeping the feed visually consistent.
+    </p>
+
+    <div class="project-grid">
+      <img src="image2.png" alt="Instagram post 1">
+      <img src="image3.png" alt="Instagram post 2">
+      <img src="image4.png" alt="Instagram post 3">
+    </div>
+  </section>
+
+  <!-- Results / Learnings -->
+  <section class="project-section">
+    <h2>Outcome & Learnings</h2>
+    <p>
+      This project strengthened my understanding of text hierarchy, brand consistency,
+      and designing for real-world social media constraints.
+      The final visuals feel premium while remaining practical for daily content updates.
+    </p>
+
+    <a class="back-link" href="index.html">← Back to Work</a>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div>© 2026 Dipika. All rights reserved.</div>
+    <div>LinkedIn · Instagram · Email</div>
+  </footer>
+
+</body>
+</html>
