@@ -3,7 +3,7 @@
       --card: #17171c;
       --text: #eaeaf0;
       --muted: #a1a1aa;
-      --accent: #e9a021;
+      --accent: #ffd51e;
     }
 
     * {
@@ -68,6 +68,17 @@ nav a:hover {
 
   .hero-content {
     max-width: 800px;
+  }
+
+  .hero-image { 
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1; /* behind text */
+    filter: brightness(0.5); /* darken image for text contrast */
   }
 
   .hero h1 {
