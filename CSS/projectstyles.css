@@ -1,6 +1,6 @@
 .project-hero {
       padding: 100px 64px 60px;
-      max-width: 1100px;
+      max-width: 100%;
     }
 
     .project-hero h1 {
@@ -19,7 +19,7 @@
 
     .project-section {
       padding: 60px 64px;
-      max-width: 1100px;
+      max-width: 100%;
     }
 
     .project-section h2 {
@@ -28,7 +28,7 @@
     }
 
     .project-section p {
-      max-width: 700px;
+      max-width: 100%;
       color: var(--muted);
       margin-bottom: 24px;
     }
