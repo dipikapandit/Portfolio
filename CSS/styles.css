@@ -9,14 +9,13 @@
     * {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
+  
       font-family: 'Inter', sans-serif;
     }
 
     body {
       background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
     }
 
     a {
@@ -106,7 +105,7 @@
     /* ---------- Projects ---------- */
     .section {
       padding: 80px 64px;
-      max-width: 1200px;
+      max-width: 100%;
     }
 
     .section-title {
