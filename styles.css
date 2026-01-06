@@ -3,7 +3,7 @@
       --card: #17171c;
       --text: #eaeaf0;
       --muted: #a1a1aa;
-      --accent: #f5c36a;
+      --accent: #e9a021;
     }
 
     * {
@@ -22,6 +22,12 @@
     a {
       text-decoration: none;
       color: inherit;
+    }
+
+    img {
+      max-width: 60%;
+      height: auto;
+      border-radius: 12px;
     }
 
     /* ---------- Header ---------- */
@@ -149,6 +155,10 @@
     @media (max-width: 768px) {
       header {
         padding: 24px;
+      }
+      img {
+        width: 150px;
+        height: auto;
       }
 
       .hero {
