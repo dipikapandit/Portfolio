@@ -92,10 +92,12 @@ nav a:hover {
     color: var(--accent);
   }
 
+
+
   .hero p {
     margin-top: 24px;
     max-width: 450px;
-    color: var(--muted);
+    color: rgb(249, 236, 154);
     font-size: 18px;
   }
 
