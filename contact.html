@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Contact — Dipika</title>
+
+	<!-- Main Styles -->
+	<link rel="stylesheet" href="css/styles.css">
+
+	<!-- Google Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+	<!-- Page-specific contact form styles -->
+  <link rel="stylesheet" href="css/contact.css">
+</head>
+
+<body>
+
+	<!-- Header -->
+	<header>
+		<div class="logo">Dipika</div>
+		<nav>
+			<a href="index.html">Home</a>
+			<a href="index.html#work">Work</a>
+			<a href="about.html">About</a>
+			<a href="contact.html">Contact</a>
+		</nav>
+	</header>
+
+	<!-- Contact Hero -->
+	<section class="contact-hero">
+		<h1>Let's work together</h1>
+		<p>If you have a project, internship opportunity, or just want to say hi, send a message below. Replace the placeholder email in the form script with your real email to receive messages via your mail client.</p>
+	</section>
+
+	<!-- Contact Form -->
+	<section class="contact-section">
+		<form class="contact-form" id="contactForm" onsubmit="handleContact(event)">
+			<div class="form-row">
+				<div>
+					<label for="name">Your name</label>
+					<input type="text" id="name" name="name" placeholder="Jane Doe" required />
+				</div>
+
+				<div>
+					<label for="email">Your email</label>
+					<input type="email" id="email" name="email" placeholder="hello@yourdomain.com" required />
+				</div>
+			</div>
+
+			<div class="form-row-single">
+				<label for="message">Message</label>
+				<textarea id="message" name="message" placeholder="Tell me about your project, timeline, budget, or anything else." required></textarea>
+			</div>
+
+			<div class="form-actions">
+				<button class="btn btn-primary" type="submit">Send message</button>
+				<div class="note">Or email me directly at <strong>dipikadidiworks@gmail.com</strong></div>
+				<div class="success-msg" id="successMsg">Message composer opened — please complete and send in your mail app.</div>
+			</div>
+		</form>
+	</section>
+
+	<!-- Footer -->
+	<footer>
+		<div>© 2026 Dipika. All rights reserved.</div>
+		<div>LinkedIn · Instagram · Email</div>
+	</footer>
+
+	<script>
+		// Basic mailto fallback: opens the user's mail client with prefilled subject/body.
+		// IMPORTANT: Replace the email below with your real email address.
+		const RECEIVER_EMAIL = 'hello@yourdomain.com';
+
+		function handleContact(event) {
+			event.preventDefault();
+			const name = document.getElementById('name').value.trim();
+			const email = document.getElementById('email').value.trim();
+			const message = document.getElementById('message').value.trim();
+
+			if (!name || !email || !message) return;
+
+			const subject = encodeURIComponent(`Portfolio contact from ${name}`);
+			const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+
+			// Open the user's default mail client
+			window.location.href = `mailto:${RECEIVER_EMAIL}?subject=${subject}&body=${body}`;
+
+			// Show a brief success hint (user still needs to send the email in their mail client)
+			const success = document.getElementById('successMsg');
+			success.style.display = 'inline-block';
+			setTimeout(() => { success.style.display = 'none'; }, 6000);
+
+			document.getElementById('contactForm').reset();
+		}
+	</script>
+
+</body>
+</html>
