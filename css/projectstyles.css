@@ -68,6 +68,19 @@
       color: var(--accent);
     }
 
+    .imgBlockchain {
+      border: 2px solid #f0a500;
+      border-radius: 12px;
+      max-width: 100%;
+    }
+
+    .image-caption {
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 8px;
+      text-align: center;
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
       .project-hero,
