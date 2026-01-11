@@ -180,6 +180,68 @@ nav a:hover {
   .logo-item img { width: 48px; height: 48px; }
 }
 
+/* ---------- Slanted marquee gallery ---------- */
+.slanted-gallery {
+  padding: 36px 24px 8px;
+  background: linear-gradient(180deg, rgba(255,213,30,0.02), transparent 30%);
+}
+
+.slanted-gallery .section-title { margin-bottom: 16px; }
+
+.slant-row {
+  overflow: hidden;
+  transform-origin: left center;
+  margin: 18px 0;
+  /* create a slight slant using rotation */
+  transform: skewY(-4deg);
+}
+
+.slant-row .slant-track {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  transform: skewY(4deg); /* counter the parent skew for contents */
+}
+
+.slant-item {
+  flex: 0 0 auto;
+  width: 300px;
+  height: 400px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--card);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+}
+
+.slant-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.slant-row .slant-track {
+  animation: slant-move 26s linear infinite;
+}
+
+.slant-row.row--rtl .slant-track { animation-direction: reverse; animation-duration: 18s; }
+.slant-row.slow .slant-track { animation-duration: 38s; }
+
+.slant-row:hover .slant-track { animation-play-state: paused; }
+
+@keyframes slant-move {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@media (max-width: 900px) {
+  .slant-item { width: 260px; height: 160px; }
+}
+
+@media (max-width: 520px) {
+  .slant-item { width: 200px; height: 140px; }
+}
+
 /* ---------- Projects ---------- */
 .section {
   padding: 80px 24px; 
@@ -196,7 +258,7 @@ nav a:hover {
 
 .section-title {
   font-size: 28px;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
   text-align: center;
 }
 
