@@ -227,7 +227,7 @@ nav a:hover {
 .slant-row.row--rtl .slant-track { animation-direction: reverse; animation-duration: 18s; }
 .slant-row.slow .slant-track { animation-duration: 38s; }
 
-.slant-row:hover .slant-track { animation-play-state: paused; }
+
 
 @keyframes slant-move {
   from { transform: translateX(0); }
