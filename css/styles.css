@@ -276,6 +276,7 @@ nav a:hover {
 .project-card h3 {
   font-size: 18px;
   margin-bottom: 8px;
+  padding-top: 12px;
 }
 
 .project-card p {

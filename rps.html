@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rock Paper Scissors</title>
+
+     <!-- Main Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+
+   <link rel="stylesheet" href="css/rps.css">
+  </head>
+  <body>
+     <a class="back-link" href="index.html">← Back to Work</a>
+
+    <p class="title">Rock Paper Scissors</p>
+
+    <section>
+      <p class="subtitle">Choose your move:</p>
+    </section>
+
+    <section class="images-section">
+      <button class= "move-button" onclick=" 
+        playGame('Rock');">
+        <img src="images/rock.png">
+      </button>
+
+      <button class= "move-button" onclick="
+        playGame('Paper');">
+        <img src="images/paper.png">
+      </button>
+
+      <button class= "move-button" onclick="
+        playGame('Scissors');">
+        <img src="images/scissors.png">
+      </button>
+
+    </section>
+
+
+
+    <p class="js-result result"></p>
+
+    <p class="js-moves"></p>
+
+    <p class="js-score score"></p>
+
+    <section class="buttons">
+
+      <button class="reset-button" onclick="
+      scores.wins = 0;
+      scores.losses = 0;
+      scores.ties = 0; 
+      localStorage.removeItem('scores');
+      updateScoreElement();
+      document.querySelector('.js-result').innerHTML = ``;
+      document.querySelector('.js-moves').innerHTML = ``;   
+      ">Reset Score</button>
+      
+      <button class="autoplay-button" onclick="autoplay();">Auto Play</button>
+
+    </section>
+
+  
+
+  
+
+    <script src="js/rps.js"></script>
+
+
+   
+
+
+    <!-- Footer -->
+  <footer>
+    <div>© 2026 Dipika. All rights reserved.</div>
+    <div>LinkedIn · Instagram · Email</div>
+  </footer>
+
+
+  </body>
+</html>
