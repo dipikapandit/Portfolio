@@ -1,0 +1,95 @@
+
+      body {
+        align-items: center;
+        color: var(--text);
+        display: flex;
+        flex-direction: column;
+      }
+
+      button {
+        font-size: 20px;
+        width: 50px;
+        height: 50px;
+        margin: 5px;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        color: white;
+      }
+
+      .number {
+        background-color: transparent; 
+        font-weight: bold;
+        border: none;
+        box-shadow: 2px 2px 5px rgba(120, 118, 118, 0.2);
+      }
+      .number:hover {
+        background-color: rgb(66, 201, 246);
+      }
+
+      .expn {
+        background-color: transparent;        
+        font-weight: bold;
+        border: none;
+        box-shadow: 2px 2px 5px rgba(120, 118, 118, 0.2);
+      }
+      .expn:hover {
+        background-color: limegreen;
+      }
+
+      .js-calculation {
+        background-color: transparent;
+        border: 1px solid rgb(64, 61, 61);
+        border-radius: 10px;
+        width: 300px;
+        height: 50px;
+        padding: 10px 10px;
+        text-align: right;
+        font-size: 30px;
+        margin-bottom: 20px;
+        margin-top: 30px;
+        min-height: 40px;       
+      }
+      .js-calculation:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 5px var(--accent);
+      }
+      
+.identity {
+  font-size: 20px;
+  color: rgb(222, 214, 218);
+  margin-top: 80px;
+  margin-bottom: 50px;
+}
+
+
+.back-link {
+ align-self: flex-start;
+  margin: 20px;
+  margin-top: 40px;
+  font-size: 14px;
+  color: var(--accent);
+ 
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+  .project-hero,
+  .project-section {
+    padding: 60px 24px;
+  }
+
+  .project-hero h1 {
+    font-size: 36px;
+  }
+
+  .project-meta {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  
+}
+  
