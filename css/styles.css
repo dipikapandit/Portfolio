@@ -235,11 +235,11 @@ nav a:hover {
 }
 
 @media (max-width: 900px) {
-  .slant-item { width: 260px; height: 160px; }
+  .slant-item { width: 160px; height: 210px; }
 }
 
 @media (max-width: 520px) {
-  .slant-item { width: 200px; height: 140px; }
+  .slant-item { width: 150px; height: 200px; }
 }
 
 /* ---------- Projects ---------- */
