@@ -235,7 +235,11 @@ nav a:hover {
 }
 
 @media (max-width: 900px) {
-  .slant-item { width: 160px; height: 210px; }
+  .slant-item { 
+    width: 160px; 
+    height: 210px; 
+    padding: 15px;
+  }
 }
 
 @media (max-width: 520px) {
@@ -265,13 +269,16 @@ nav a:hover {
 .project-card {
   background: var(--card);
   border-radius: 16px;
-  padding: 24px;
+  padding: 15px;
   transition: transform 0.3s ease;
+  text-align-last: left
 }
 
 .project-card:hover {
   transform: translateY(-6px);
 }
+
+
 
 .project-card h3 {
   font-size: 18px;
@@ -298,7 +305,7 @@ footer {
     /* ---------- Responsive ---------- */
     @media (max-width: 768px) {
       header {
-        padding: 24px;
+        padding: 15px;
       }
       img {
         width: 150px;
@@ -306,7 +313,7 @@ footer {
       }
 
       .hero {
-        padding: 80px 24px;
+        padding: 80px 15px;
       }
 
       .hero h1 {
@@ -314,13 +321,17 @@ footer {
       }
 
       .section {
-        padding: 60px 24px;
+        padding: 60px 15px;
+        align-items: right;
       }
+
+     
 
       footer {
         flex-direction: column;
+        align-items: center;
         gap: 16px;
-        padding: 32px 24px;
+        padding: 32px 15px;
       }
     }
 
