@@ -43,12 +43,27 @@ header {
   justify-content: space-between;
   align-items: center;
   position: relative;
+
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.15);
+
+   z-index: 1000;
 }
 
 .logo {
   font-weight: 700;
   font-size: 20px;
 }
+
+nav {
+  display: flex;
+  align-items: center;
+ 
+}
+
 
 nav a {
   margin-left: 32px;
