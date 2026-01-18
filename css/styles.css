@@ -371,7 +371,7 @@ nav a:hover {
   }
 
   /* Stack hero vertically on tablet */
-  .hero-inner { flex-direction: column-reverse; gap: 0px; padding: 40px 0; }
+  .hero-inner { flex-direction: column-reverse; gap: 0px; padding: 40px 0; margin-top: 60px;}
   .hero-visual { width: 100%; display: flex; justify-content: center; }
   .hero-text { width: 100%; }
 
