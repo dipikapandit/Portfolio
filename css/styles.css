@@ -236,7 +236,6 @@ nav a:hover {
 }
 
 .btn {
-
   padding: 14px 24px;
   border-radius: 10px;
   font-size: 14px;
@@ -258,8 +257,6 @@ nav a:hover {
 
 
 /* ---------- Tools marquee (scrolling logos) ---------- */
-
-
 .section-title {
   font-size: 28px;
   text-align: center;
@@ -374,9 +371,15 @@ nav a:hover {
   }
 
   /* Stack hero vertically on tablet */
-  .hero-inner { flex-direction: column-reverse; gap: 28px; padding: 40px 0; }
+  .hero-inner { flex-direction: column-reverse; gap: 0px; padding: 40px 0; }
   .hero-visual { width: 100%; display: flex; justify-content: center; }
   .hero-text { width: 100%; }
+
+  /* Slightly smaller portrait on tablet/smaller screens */
+  .portrait-inner {
+    max-width: 320px;
+    width: 100%;
+  }
 }
 
 @media (max-width: 520px) {
@@ -389,10 +392,24 @@ nav a:hover {
   /* Mobile: make hero stack naturally */
   .hero-inner { 
     padding: 28px 0;  
+    margin-top: 50px;;
     gap: 0px;  
   }
   .portrait-wrap { padding: 6px; }
   .portrait-inner { border-radius: 10px; }
+
+  /* Make portrait 50% smaller on narrow screens and avoid header overlap */
+  .portrait-inner {
+    max-width: 200px; /* ~50% of prior mobile size */
+    width: 100%;
+    padding: 6px;
+  }
+
+  /* Ensure hero content isn't covered by the header/nav on mobile */
+  .hero { 
+    margin-top: 50px;
+    padding-top: 64px;
+  }
 }
 
 /* ---------- Projects ---------- */
