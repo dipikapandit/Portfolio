@@ -382,11 +382,15 @@ nav a:hover {
 @media (max-width: 520px) {
   video { 
     margin: 0;
-    width: auto; height: 100%; }
+    width: auto; height: 100%; 
+  }
   .slant-item { width: 150px; height: 200px; }
 
   /* Mobile: make hero stack naturally */
-  .hero-inner { padding: 28px 0; }
+  .hero-inner { 
+    padding: 28px 0;  
+    gap: 0px;  
+  }
   .portrait-wrap { padding: 6px; }
   .portrait-inner { border-radius: 10px; }
 }
