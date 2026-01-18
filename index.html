@@ -15,8 +15,14 @@
 
   <!-- Header -->
   <header>
-    <div class="logo">Dipika Pandit</div>
-    <nav>
+    <div class="logo">Dipika</div>
+
+    <!-- Hamburger for mobile -->
+    <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+      <span class="hamburger" aria-hidden="true"></span>
+    </button>
+
+    <nav id="site-nav">
       <a href="index.html#work">Work</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
@@ -25,13 +31,12 @@
 
   <!-- Hero Section -->
   <section class="hero">
-    <div class="hero-content">
-      <div>
-        <img src="images/pikachu.jpg" alt="Hero Image" class="hero-image" />
-      </div>
-    
+    <video class="hero-video" src="images/video.mp4" autoplay muted loop></video>
+
+    <div class="hero-inner">
+      <div class="hero-text">
         <h1>
-          Design x <span>Tech</span>
+          Design  x  <span>Tech</span>
         </h1>
         <p>
           Graphic & UI designer focused on clean visuals,
@@ -42,6 +47,16 @@
           <button class="btn btn-primary" onclick="location.href='index.html#work'">View Work</button>
           <button class="btn btn-secondary" onclick="location.href='contact.html'">Contact Me</button>
         </div>
+      </div>
+
+      <!-- Interactive 3D Pikachu portrait / image -->
+      <div class="hero-visual" aria-hidden="false">
+        <div class="portrait-wrap" id="portraitWrap">
+          <div class="portrait-inner" id="portraitInner">
+            <img src="images/pika.png" alt="Pikachu portrait">
+          </div>
+        </div>
+      </div>
     </div>
 </section>
 

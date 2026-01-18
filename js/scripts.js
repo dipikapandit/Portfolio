@@ -42,3 +42,83 @@ for (let i = 0; i < slantItems.length; i++) {
         resetClick(this);
     }
 }
+
+// Responsive nav toggle
+document.addEventListener('DOMContentLoaded', function() {
+    const navToggle = document.querySelector('.nav-toggle');
+    const header = document.querySelector('header');
+    const siteNav = document.getElementById('site-nav') || document.getElementById('site-nav');
+
+    if (!navToggle || !header) return;
+
+    navToggle.addEventListener('click', function(e) {
+        const expanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', String(!expanded));
+        header.classList.toggle('nav-open');
+        this.setAttribute('aria-label', expanded ? 'Open menu' : 'Close menu');
+    });
+
+    // Close menu when a nav link is clicked (mobile)
+    const links = header.querySelectorAll('nav a');
+    links.forEach(link => link.addEventListener('click', () => {
+        header.classList.remove('nav-open');
+        if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
+    }));
+
+    // Close when clicking outside the nav
+    document.addEventListener('click', function(e) {
+        if (!header.classList.contains('nav-open')) return;
+        const withinHeader = e.composedPath().includes(header);
+        if (!withinHeader) {
+            header.classList.remove('nav-open');
+            navToggle.setAttribute('aria-expanded', 'false');
+        }
+    });
+});
+
+// Portrait tilt / parallax interaction
+(function() {
+    const wrap = document.getElementById('portraitWrap');
+    const inner = document.getElementById('portraitInner');
+    if (!wrap || !inner) return;
+
+    let frame;
+    const state = { rx: 0, ry: 0, scale: 1 };
+
+    function applyTransform() {
+        inner.style.transform = `perspective(800px) rotateX(${state.rx}deg) rotateY(${state.ry}deg) scale(${state.scale})`;
+    }
+
+    function onMove(e) {
+        const rect = wrap.getBoundingClientRect();
+        const x = (e.clientX ?? (e.touches && e.touches[0].clientX)) - rect.left;
+        const y = (e.clientY ?? (e.touches && e.touches[0].clientY)) - rect.top;
+        const cx = rect.width / 2;
+        const cy = rect.height / 2;
+        const dx = (x - cx) / cx; // -1 .. 1
+        const dy = (y - cy) / cy;
+
+        // limit rotation
+        const maxTilt = 8; // degrees
+        state.ry = Math.max(Math.min(dx * maxTilt, maxTilt), -maxTilt);
+        state.rx = Math.max(Math.min(-dy * maxTilt, maxTilt), -maxTilt);
+        state.scale = 1.03;
+
+        if (!frame) frame = requestAnimationFrame(() => {
+            applyTransform();
+            frame = null;
+        });
+    }
+
+    function onLeave() {
+        state.rx = 0; state.ry = 0; state.scale = 1;
+        if (frame) cancelAnimationFrame(frame);
+        frame = requestAnimationFrame(() => { applyTransform(); frame = null; });
+    }
+
+    wrap.addEventListener('mousemove', onMove);
+    wrap.addEventListener('touchmove', onMove, { passive: true });
+    wrap.addEventListener('mouseleave', onLeave);
+    wrap.addEventListener('touchend', onLeave);
+    wrap.addEventListener('touchcancel', onLeave);
+})();

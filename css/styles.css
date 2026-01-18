@@ -28,7 +28,13 @@ img {
   height: auto;
   border-radius: 12px;
 }
+
+video {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
   
+}
 /* ---------- Header ---------- */
 
 header {
@@ -36,6 +42,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 .logo {
@@ -53,6 +60,64 @@ nav a:hover {
   color: var(--text);
 }
 
+/* ---------- Responsive nav / hamburger ---------- */
+.nav-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.nav-toggle { z-index: 90; }
+
+.hamburger {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text);
+  position: relative;
+}
+.hamburger::before,
+.hamburger::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 22px;
+  height: 2px;
+  background: var(--text);
+}
+.hamburger::before { top: -7px; }
+.hamburger::after { top: 7px; }
+
+/* Mobile: hide default nav and show toggle */
+@media (max-width: 768px) {
+  .nav-toggle { display: flex; }
+  nav {
+    position: absolute;
+    top: 64px;
+    right: 16px;
+    left: 16px;
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+    background: var(--card);
+    border-radius: 12px;
+    z-index: 100;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  }
+
+  header.nav-open nav {
+    display: flex;
+  }
+
+  nav a { margin-left: 0; color: var(--text); }
+}
+
 /* ---------- Hero ---------- */
 
 .hero {
@@ -64,10 +129,11 @@ nav a:hover {
   position: relative;
   color: #fff; /* text visible on image */
   padding: 0 64px; /* horizontal padding */
+  margin: 20px 0;
   text-align: center;
 }
 
-.hero-image {
+.hero-video {
   position: absolute;
   top: 0;
   left: 0;
@@ -83,6 +149,8 @@ nav a:hover {
   font-size: 56px;
   font-weight: 700;
   line-height: 1.1;
+  margin-left: 20px;
+  text-align: left;
 }
 
 .hero h1 span {
@@ -90,19 +158,66 @@ nav a:hover {
 }
 
 .hero p {
+  text-align: left;
   margin-top: 24px;
   max-width: 450px;
-  color: rgb(249, 236, 154);
+  color: var(--muted);
   font-size: 18px;
-  margin-left: auto;
+  margin-left: 20px;
   margin-right: auto;
 }
 
 .hero-buttons {
   margin-top: 40px;
+  margin-left: 20px;
   display: flex;
   gap: 16px;
+}
+
+/* Hero inner layout: text left, visual right */
+.hero-inner {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  gap: 48px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 80px 0;
+}
+
+.hero-text {
+  flex: 1 1 560px;
+  text-align: left;
+}
+
+.hero-visual {
+  flex: 0 0 380px;
+  display: flex;
+  align-items: center;
   justify-content: center;
+}
+
+/* Portrait wrapper + animated streaky gradient border */
+
+
+.portrait-inner {
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  background: none;
+  transform-style: preserve-3d;
+  transition: transform 0.12s cubic-bezier(.2,.9,.2,1), box-shadow 0.12s ease;
+}
+
+.portrait-inner img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
 .btn {
@@ -235,15 +350,30 @@ nav a:hover {
 }
 
 @media (max-width: 900px) {
+  video { width: auto; height: 100%; }
+
   .slant-item { 
     width: 160px; 
     height: 210px; 
     padding: 15px;
   }
+
+  /* Stack hero vertically on tablet */
+  .hero-inner { flex-direction: column-reverse; gap: 28px; padding: 40px 0; }
+  .hero-visual { width: 100%; display: flex; justify-content: center; }
+  .hero-text { width: 100%; }
 }
 
 @media (max-width: 520px) {
+  video { 
+    margin: 0;
+    width: auto; height: 100%; }
   .slant-item { width: 150px; height: 200px; }
+
+  /* Mobile: make hero stack naturally */
+  .hero-inner { padding: 28px 0; }
+  .portrait-wrap { padding: 6px; }
+  .portrait-inner { border-radius: 10px; }
 }
 
 /* ---------- Projects ---------- */
