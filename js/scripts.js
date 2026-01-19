@@ -79,14 +79,12 @@ document.addEventListener('DOMContentLoaded', function() {
 // Portrait tilt / parallax interaction
 (function() {
     const wrap = document.getElementById('portraitWrap');
-    const inner = document.getElementById('portraitInner');
-    if (!wrap || !inner) return;
-
+    if (!wrap) return;
     let frame;
     const state = { rx: 0, ry: 0, scale: 1 };
 
     function applyTransform() {
-        inner.style.transform = `perspective(800px) rotateX(${state.rx}deg) rotateY(${state.ry}deg) scale(${state.scale})`;
+        wrap.style.transform = `perspective(800px) rotateX(${state.rx}deg) rotateY(${state.ry}deg) scale(${state.scale})`;
     }
 
     function onMove(e) {
