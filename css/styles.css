@@ -53,13 +53,13 @@ img {
 video {
   max-width: 100%;
   height: auto;
-  border-radius: 12px;
-  
+  border-radius: 12px; 
 }
 
-section{
-  padding: 60px 40px;
+.section {
+  padding: 40px 20px;
 }
+
 
 /* ----------------------------
    3) Header & navigation
