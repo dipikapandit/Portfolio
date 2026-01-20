@@ -27,6 +27,15 @@
   --text: #eaeaf0;
   --muted: #a1a1aa;
   --accent: #ffd51e;
+
+  /* Spacing scale */
+  --space-xxs: 6px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 20px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-xxl: 80px;
 }
 
 * { box-sizing: border-box; }
@@ -57,7 +66,7 @@ video {
 }
 
 .section {
-  padding: 40px 20px;
+  padding: var(--space-xxl) var(--space-md);
 }
 
 
@@ -65,7 +74,7 @@ video {
    3) Header & navigation
    ---------------------------- */
 header {
-  padding: 24px 64px;
+  padding: var(--space-md) var(--space-xl);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -81,7 +90,7 @@ header {
 .logo { font-weight: 700; font-size: 20px; }
 
 nav { display: flex; align-items: center; }
-nav a { margin-left: 32px; font-size: 14px; color: var(--muted); }
+nav a { margin-left: var(--space-lg); font-size: 14px; color: var(--muted); }
 nav a:hover { color: var(--text); }
 
 /* Hamburger button — hidden on desktop, visible on mobile */
@@ -107,7 +116,7 @@ header.nav-open nav { display: flex; }
    ---------------------------- */
 .hero {
   height: 100vh; width: 100%; position: relative; display: flex; align-items: center; justify-content: center;
-  padding: 0 64px; margin: 20px 0; color: var(--text);
+  padding: 0 var(--space-xl); margin: var(--space-sm) 0; color: var(--text);
 }
 
 .hero-video {
@@ -116,13 +125,13 @@ header.nav-open nav { display: flex; }
 
 /* Two-column hero content: left = text, right = visual */
 .hero-inner {
-  width: 100%; max-width: 1200px; display: flex; gap: 48px; align-items: center; justify-content: space-between; padding: 80px 0;
+  width: 100%; max-width: 1200px; display: flex; gap: var(--space-xl); align-items: center; justify-content: space-between; padding: var(--space-xxl) 0;
 }
 .hero-text { flex: 1 1 560px; text-align: left; }
 .hero-text h1 { font-size: 56px; line-height: 1.1; margin: 0 0 8px 0; }
 .hero-text h1 span { color: var(--accent); }
-.hero-text p { margin-top: 16px; max-width: 520px; color: var(--muted); font-size: 18px; }
-.hero-buttons { margin-top: 28px; display: flex; gap: 16px; }
+.hero-text p { margin-top: var(--space-sm); max-width: 520px; color: var(--muted); font-size: 18px; }
+.hero-buttons { margin-top: var(--space-md); display: flex; gap: var(--space-md); }
 
 .hero-visual { flex: 0 0 380px; display: flex; align-items: center; justify-content: center; }
 
@@ -130,6 +139,7 @@ header.nav-open nav { display: flex; }
 
 .portrait-wrap {
   position: relative; z-index: 2; overflow: hidden; background: none;
+  padding: var(--space-xs);
   transform-style: preserve-3d; transition: transform 0.12s cubic-bezier(.2,.9,.2,1), box-shadow 0.12s ease;
 }
 .portrait-wrap img { width: 100%; height: auto; display: block; object-fit: cover; }
@@ -139,7 +149,7 @@ header.nav-open nav { display: flex; }
 /* ----------------------------
    5) Buttons
    ---------------------------- */
-.btn { padding: 14px 24px; border-radius: 10px; font-size: 14px; font-weight: 500; border: none; cursor: pointer; }
+.btn { padding: var(--space-sm) var(--space-md); border-radius: 10px; font-size: 14px; font-weight: 500; border: none; cursor: pointer; }
 .btn-primary { background: var(--accent); color: #000; }
 .btn-secondary { background: transparent; color: var(--text); border: 1px solid #2a2a32; }
 
@@ -147,7 +157,7 @@ header.nav-open nav { display: flex; }
    6) Tools marquee (logos)
    ---------------------------- */
 .marquee { overflow: hidden; width: 100%; }
-.marquee-track { display: flex; gap: 28px; align-items: center; animation: marquee 18s linear infinite; }
+.marquee-track { display: flex; gap: var(--space-lg); align-items: center; animation: marquee 18s linear infinite; }
 .marquee:hover .marquee-track { animation-play-state: paused; }
 .logo-item { flex: 0 0 auto; width: 110px; height: 100px; display: flex; align-items: center; justify-content: center; }
 .logo-item img { width: 64px; height: 64px; object-fit: contain; filter: invert(1) brightness(2); }
@@ -156,10 +166,10 @@ header.nav-open nav { display: flex; }
 /* ----------------------------
    7) Slanted marquee gallery
    ---------------------------- */
-.slanted-gallery { padding: 36px 24px 8px; background: linear-gradient(180deg, rgba(255,213,30,0.02), transparent 30%); }
-.slanted-gallery .section-title { margin-bottom: 16px; }
-.slant-row { overflow: hidden; transform-origin: left center; margin: 18px 0; transform: skewY(-4deg); }
-.slant-row .slant-track { display: flex; gap: 18px; align-items: center; transform: skewY(4deg); animation: slant-move 26s linear infinite; }
+.slanted-gallery { padding: var(--space-lg) var(--space-md) var(--space-sm); background: linear-gradient(180deg, rgba(255,213,30,0.02), transparent 30%); }
+.slanted-gallery .section-title { margin-bottom: var(--space-sm); }
+.slant-row { overflow: hidden; transform-origin: left center; margin: var(--space-md) 0; transform: skewY(-4deg); }
+.slant-row .slant-track { display: flex; gap: var(--space-sm); align-items: center; transform: skewY(4deg); animation: slant-move 26s linear infinite; }
 .slant-item { flex: 0 0 auto; width: 300px; height: 400px; overflow: hidden; border-radius: 12px; background: var(--card); box-shadow: 0 8px 30px rgba(0,0,0,0.6); }
 .slant-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .slant-row.row--rtl .slant-track { animation-direction: reverse; animation-duration: 18s; }
@@ -169,16 +179,16 @@ header.nav-open nav { display: flex; }
 /* ----------------------------
    8) Projects grid
    ---------------------------- */
-.projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
-.project-card { background: var(--card); border-radius: 16px; padding: 15px; transition: transform 0.3s ease; }
-.project-card h3 { font-size: 18px; margin-bottom: 8px; padding-top: 12px; }
+.projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-md); }
+.project-card { background: var(--card); border-radius: 16px; padding: var(--space-sm); transition: transform 0.3s ease; }
+.project-card h3 { font-size: 18px; margin-bottom: 8px; padding-top: var(--space-xs); }
 .project-card p { font-size: 14px; color: var(--muted); }
 .project-card:hover { transform: translateY(-6px); }
 
 /* ----------------------------
    9) Footer
    ---------------------------- */
-footer { padding: 40px 64px; border-top: 1px solid #1f1f26; display: flex; justify-content: space-between; color: var(--muted); font-size: 14px; }
+footer { padding: var(--space-lg) var(--space-xl); border-top: 1px solid #1f1f26; display: flex; justify-content: space-between; color: var(--muted); font-size: 14px; }
 
 /* ----------------------------
    10) Responsive breakpoints
@@ -187,13 +197,13 @@ footer { padding: 40px 64px; border-top: 1px solid #1f1f26; display: flex; justi
 
 /* Tablet / small desktop */
 @media (max-width: 900px) {
-  .section { padding: 60px 24px; }
-  .slant-item { width: 160px; height: 210px; padding: 15px; }
+  .section { padding: calc(var(--space-xxl) * 0.75) var(--space-md); }
+  .slant-item { width: 160px; height: 210px; padding: var(--space-sm); }
 
   /* stack hero vertically on narrower screens; portrait moves below text */
-  .hero-inner { flex-direction: column-reverse; gap: 20px; padding: 40px 0; margin-top: 90px;}
+  .hero-inner { flex-direction: column-reverse; gap: var(--space-lg); padding: var(--space-lg) 0; margin-top: var(--space-xl); }
   .hero-visual { width: 100%; display: flex; justify-content: center; }
-  .hero-text { width: 100%; }
+  .hero-text { width: 100%; padding: 0 var(--space-md); }
 
   /* portrait slightly reduced on tablet */
   .portrait-wrap { max-width: 320px; width: 100%; }
@@ -201,22 +211,22 @@ footer { padding: 40px 64px; border-top: 1px solid #1f1f26; display: flex; justi
 
 /* Mobile: show hamburger, collapse nav into panel */
 @media (max-width: 768px) {
-  header { padding: 15px; }
+  header { padding: var(--space-sm); }
   .nav-toggle { display: flex; }
 
   nav {
     position: absolute; top: 64px; right: 16px; left: 16px; display: none;
-    flex-direction: column; gap: 12px; padding: 16px; background: var(--card); border-radius: 12px; z-index: 100;
+    flex-direction: column; gap: var(--space-xs); padding: var(--space-sm); background: var(--card); border-radius: 12px; z-index: 100;
     box-shadow: 0 10px 30px rgba(0,0,0,0.6);
   }
   header.nav-open nav { display: flex; }
   nav a { margin-left: 0; color: var(--text); }
 
   .logo { font-size: 18px; }
-  .hero { padding: 80px 30px; }
-  .hero-inner { padding: 28px 0; gap: 0; margin-top: 80px; }
+  .hero { padding: var(--space-xxl) var(--space-md); }
+  .hero-inner { padding: var(--space-md) 0; gap: 0; margin-top: var(--space-xl); }
   .hero h1 { font-size: 60px; }
-  .section { padding: 60px 15px; }
+  .section { padding: var(--space-xl) var(--space-sm); }
 }
 
 /* Narrow mobile adjustments */
@@ -224,8 +234,8 @@ footer { padding: 40px 64px; border-top: 1px solid #1f1f26; display: flex; justi
   .slant-item { width: 150px; height: 200px; }
 
   /* stack hero content */
-  .hero-inner { padding: 28px 0; gap: 0; margin-top: 80px; }
-  .portrait-wrap { padding: 6px; }
+  .hero-inner { padding: var(--space-md) 0; gap: 0; margin-top: var(--space-xl); }
+  .portrait-wrap { padding: var(--space-xs); }
   .portrait-wrap { max-width: 300px; width: 100%; }
 
 }
