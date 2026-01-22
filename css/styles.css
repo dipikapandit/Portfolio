@@ -352,6 +352,7 @@ footer { padding: var(--space-lg) var(--space-xl); border-top: 1px solid #1f1f26
   .hero { padding: var(--space-xxl) var(--space-md); }
   .hero-inner { padding: var(--space-md) 0; gap: 0; margin-top: var(--space-xl); }
   .hero h1 { font-size: 40px; }
+  .hero p { max-width: 610px; color: var(--muted); font-size: 17px; }
   .section { padding: var(--space-xl) var(--space-sm); }
   .section-title { font-size: 30px; }
 }
@@ -361,7 +362,7 @@ footer { padding: var(--space-lg) var(--space-xl); border-top: 1px solid #1f1f26
   .slant-item { width: 150px; height: 200px; }
 
   /* stack hero content */
-  .hero-inner { padding: var(--space-md) 0; gap: 0; margin-top: var(--space-xl); }
+  .hero-inner { padding: var(--space-sm) 0; gap: 0; margin-top: var(--space-xl); }
   .portrait-wrap { padding: var(--space-xs); }
   .portrait-wrap { max-width: 300px; width: 100%; }
 
