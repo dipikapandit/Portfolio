@@ -69,6 +69,15 @@ video {
   padding: var(--space-xxl) var(--space-md);
 }
 
+/* Generic section title used across project and tools sections */
+.section-title {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: bold;
+  font-size: 48px;
+}
+
 
 /* ----------------------------
    3) Header & navigation
@@ -163,9 +172,99 @@ header.nav-open nav { display: flex; }
 .logo-item img { width: 64px; height: 64px; object-fit: contain; filter: invert(1) brightness(2); }
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
+
+/* ----------------------------
+   Philosophy section
+   ---------------------------- */
+#philosophy {
+  padding: var(--space-xl) var(--space-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, rgba(255,213,30,0.01), transparent 30%);
+}
+
+#philosophy > div {
+  max-width: 1800px;
+  width: 100%;
+  text-align: center; /* center the whole block */
+  background: rgba(23,23,28,0.35);
+  /* increased vertical padding for a more prominent card */
+  padding: var(--space-lg) var(--space-md);
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.03);
+}
+
+/* Heading: smaller, muted label */
+#philosophy h2 {
+  margin: 0 0 var(--space-sm) 0;
+  font-size: 14px; /* small label */
+  color: var(--muted);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  /* breathing room inside the heading */
+  padding: var(--space-xs) 0;
+}
+
+/* Quote (first paragraph) — prominent, largest */
+#philosophy p {
+  margin: 0 0 var(--space-sm) 0;
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 16px;
+  /* internal vertical padding to increase readability */
+  padding: var(--space-sm) 0;
+}
+
+#philosophy p:first-of-type {
+  /* Make the quoted text very prominent and span the full card width */
+  display: block;
+  width: 100%;
+  font-size: 48px; /* larger for stronger hierarchy */
+  color: var(--text);
+  font-weight: 800;
+  line-height: 1.08;
+  margin: 0 0 var(--space-md) 0;
+  padding-top: var(--space-sm);
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+/* make supporting paragraph narrower so it breaks into two lines and reads as secondary */
+#philosophy p:not(:first-of-type) {
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 15px;
+  color: var(--muted);
+}
+
+/* Accent for the single word 'design' inside the quote */
+.accent-word {
+  color: var(--accent);
+  font-weight: 800;
+}
+
+/* Stack and adjust spacing on smaller screens */
+@media (max-width: 768px) {
+  #philosophy { padding: var(--space-lg) var(--space-sm); }
+  #philosophy > div { padding: var(--space-md); }
+  /* scale down the big quote for tablet */
+  #philosophy p:first-of-type { font-size: 32px; }
+}
+
+@media (max-width: 520px) {
+  /* mobile: keep the quote readable but smaller */
+  #philosophy p:first-of-type { font-size: 22px; }
+}
+
+
 /* ----------------------------
    7) Slanted marquee gallery
    ---------------------------- */
+
+
 .slanted-gallery { padding: var(--space-lg) var(--space-md) var(--space-sm); background: linear-gradient(180deg, rgba(255,213,30,0.02), transparent 30%); }
 .slanted-gallery .section-title { margin-bottom: var(--space-sm); }
 .slant-row { overflow: hidden; transform-origin: left center; margin: var(--space-md) 0; transform: skewY(-4deg); }
@@ -199,6 +298,7 @@ footer { padding: var(--space-lg) var(--space-xl); border-top: 1px solid #1f1f26
 @media (max-width: 900px) {
   .section { padding: calc(var(--space-xxl) * 0.75) var(--space-md); }
   .slant-item { width: 160px; height: 210px; padding: var(--space-sm); }
+  .section-title { font-size: 36px; }
 
   /* stack hero vertically on narrower screens; portrait moves below text */
   .hero-inner { flex-direction: column-reverse; gap: var(--space-lg); padding: var(--space-lg) 0; margin-top: var(--space-xl); }
@@ -227,6 +327,7 @@ footer { padding: var(--space-lg) var(--space-xl); border-top: 1px solid #1f1f26
   .hero-inner { padding: var(--space-md) 0; gap: 0; margin-top: var(--space-xl); }
   .hero h1 { font-size: 60px; }
   .section { padding: var(--space-xl) var(--space-sm); }
+  .section-title { font-size: 30px; }
 }
 
 /* Narrow mobile adjustments */
