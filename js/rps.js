@@ -18,6 +18,18 @@ let scores = JSON.parse(localStorage.getItem('scores')) || {
           clearInterval(intervalId);
           isAutoPlaying = false;
         }
+
+        updateAutoplayButton();
+      }
+
+      function updateAutoplayButton() {
+        const autoplayButton = document.querySelector('.autoplay-button');
+
+        if (!autoplayButton) {
+          return;
+        }
+
+        autoplayButton.classList.toggle('is-active', isAutoPlaying);
       }
 
       function playGame(playerMove) {
@@ -87,3 +99,5 @@ let scores = JSON.parse(localStorage.getItem('scores')) || {
         }          
         return computerMove;      
       }
+
+      updateAutoplayButton();
