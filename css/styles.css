@@ -155,6 +155,32 @@ header.nav-open nav { display: flex; }
 
 @keyframes portrait-ring { to { transform: rotate(360deg); } }
 
+/* rotating phrase inside hero paragraph (typewriter style) */
+.rotating-phrase {
+  display: inline-block;
+  margin-left: 6px;
+  color: var(--muted);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* blinking caret implemented with ::after so it stays visible while typing */
+.rotating-phrase::after {
+  content: '';
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: var(--muted);
+  margin-left: 8px;
+  vertical-align: text-bottom;
+  animation: caret-blink 1s steps(1) infinite;
+}
+
+@keyframes caret-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
 /* ----------------------------
    5) Buttons
    ---------------------------- */
@@ -325,7 +351,7 @@ footer { padding: var(--space-lg) var(--space-xl); border-top: 1px solid #1f1f26
   .logo { font-size: 18px; }
   .hero { padding: var(--space-xxl) var(--space-md); }
   .hero-inner { padding: var(--space-md) 0; gap: 0; margin-top: var(--space-xl); }
-  .hero h1 { font-size: 60px; }
+  .hero h1 { font-size: 40px; }
   .section { padding: var(--space-xl) var(--space-sm); }
   .section-title { font-size: 30px; }
 }

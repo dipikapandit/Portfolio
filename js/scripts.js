@@ -120,3 +120,48 @@ document.addEventListener('DOMContentLoaded', function() {
     wrap.addEventListener('touchend', onLeave);
     wrap.addEventListener('touchcancel', onLeave);
 })();
+
+// Typewriter-style rotator for hero paragraph
+document.addEventListener('DOMContentLoaded', function() {
+    const phrases = ['clean visuals.', 'strong hierarchy.', 'thoughtful storytelling.'];
+    const el = document.querySelector('.rotating-phrase');
+    if (!el) return;
+
+    const typingSpeed = 70; // ms per char
+    const deletingSpeed = 35; // ms per char when deleting
+    const pauseAfterTyped = 1100; // ms to wait after full word
+    const pauseBetween = 300; // ms between delete and next type
+
+    function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+    async function typeText(text) {
+        for (let i = 1; i <= text.length; i++) {
+            el.textContent = text.slice(0, i);
+            await sleep(typingSpeed);
+        }
+    }
+
+    async function deleteText() {
+        let current = el.textContent;
+        while (current.length > 0) {
+            current = current.slice(0, -1);
+            el.textContent = current;
+            await sleep(deletingSpeed);
+        }
+    }
+
+    // start the loop
+    (async function loop() {
+        let idx = 0;
+        // clear initially so caret shows before typing
+        el.textContent = '';
+        while (true) {
+            const phrase = phrases[idx];
+            await typeText(phrase);
+            await sleep(pauseAfterTyped);
+            await deleteText();
+            await sleep(pauseBetween);
+            idx = (idx + 1) % phrases.length;
+        }
+    })();
+});
