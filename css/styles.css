@@ -139,7 +139,7 @@ header.nav-open nav { display: flex; }
 .hero-text { flex: 1 1 560px; text-align: left; }
 .hero-text h1 { font-size: 56px; line-height: 1.1; margin: 0 0 8px 0; }
 .hero-text h1 span { color: var(--accent); }
-.hero-text p { margin-top: var(--space-sm); max-width: 520px; color: var(--muted); font-size: 18px; }
+.hero-text p { margin-top: var(--space-sm); max-width: 610px; color: var(--muted); font-size: 18px; }
 .hero-buttons { margin-top: var(--space-md); display: flex; gap: var(--space-md); }
 
 .hero-visual { flex: 0 0 380px; display: flex; align-items: center; justify-content: center; }

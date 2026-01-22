@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Typewriter-style rotator for hero paragraph
 document.addEventListener('DOMContentLoaded', function() {
-    const phrases = ['clean visuals.', 'strong hierarchy.', 'thoughtful storytelling.'];
+    const phrases = ['<CLEAN VISUALS>', '<STRONG HIERARCHY>', '<THOUGHTFUL STORYTELLING>'];
     const el = document.querySelector('.rotating-phrase');
     if (!el) return;
 
