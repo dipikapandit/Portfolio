@@ -280,6 +280,13 @@ header.nav-open nav { display: flex; }
   #philosophy p:first-of-type { font-size: 32px; }
 }
 
+
+  /* Make slanted marquee rows scroll faster on narrow mobile screens */
+  .slant-row .slant-track { animation-duration: 14s; }
+  /* RTL row should be relatively faster */
+  .slant-row.row--rtl .slant-track { animation-duration: 10s; }
+  /* slow row remains slower but still faster on mobile */
+  .slant-row.slow .slant-track { animation-duration: 22s; }
 @media (max-width: 520px) {
   /* mobile: keep the quote readable but smaller */
   #philosophy p:first-of-type { font-size: 22px; }
