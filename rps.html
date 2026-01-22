@@ -9,65 +9,59 @@
    <link rel="stylesheet" href="css/rps.css">
   </head>
   <body>
-     <a class="back-link" href="index.html">← Back to Work</a>
+    <main class="page-content">
+      <a class="back-link" href="index.html">← Back to Work</a>
 
-    <p class="title">Rock Paper Scissors</p>
+      <p class="title">Rock Paper Scissors</p>
 
-    <section>
-      <p class="subtitle">Choose your move:</p>
-    </section>
+      <section>
+        <p class="subtitle">Choose your move:</p>
+      </section>
 
-    <section class="images-section">
-      <button class= "move-button" onclick=" 
-        playGame('Rock');">
-        <img src="images/rock.png">
-      </button>
+      <section class="images-section">
+        <button class= "move-button" onclick=" 
+          playGame('Rock');">
+          <img src="images/rock.png">
+        </button>
 
-      <button class= "move-button" onclick="
-        playGame('Paper');">
-        <img src="images/paper.png">
-      </button>
+        <button class= "move-button" onclick="
+          playGame('Paper');">
+          <img src="images/paper.png">
+        </button>
 
-      <button class= "move-button" onclick="
-        playGame('Scissors');">
-        <img src="images/scissors.png">
-      </button>
+        <button class= "move-button" onclick="
+          playGame('Scissors');">
+          <img src="images/scissors.png">
+        </button>
 
-    </section>
+      </section>
 
 
 
-    <p class="js-result result"></p>
+      <p class="js-result result"></p>
 
-    <p class="js-moves"></p>
+      <p class="js-moves"></p>
 
-    <p class="js-score score"></p>
+      <p class="js-score score"></p>
 
-    <section class="buttons">
+      <section class="buttons">
 
-      <button class="reset-button" onclick="
-      scores.wins = 0;
-      scores.losses = 0;
-      scores.ties = 0; 
-      localStorage.removeItem('scores');
-      updateScoreElement();
-      document.querySelector('.js-result').innerHTML = ``;
-      document.querySelector('.js-moves').innerHTML = ``;   
-      ">Reset Score</button>
-      
-      <button class="autoplay-button" onclick="autoplay();">Auto Play</button>
+        <button class="reset-button" onclick="
+        scores.wins = 0;
+        scores.losses = 0;
+        scores.ties = 0; 
+        localStorage.removeItem('scores');
+        updateScoreElement();
+        document.querySelector('.js-result').innerHTML = ``;
+        document.querySelector('.js-moves').innerHTML = ``;   
+        ">Reset Score</button>
+        
+        <button class="autoplay-button" onclick="autoplay();">Auto Play</button>
 
-    </section>
-
-  
-
-  
+      </section>
+    </main>
 
     <script src="js/rps.js"></script>
-
-
-   
-
 
     <!-- Footer -->
   <footer>
