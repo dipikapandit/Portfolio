@@ -1,82 +1,13 @@
-// Logo hover effect
-
-function hoverEffect(element) {
-    element.style.transform = "scale(1.25)";
-    element.style.transition = "transform 0.3s ease";
-}
-
-function removeHoverEffect(element) {
-    element.style.transform = "scale(1)";
-}   
-
-document.addEventListener("DOMContentLoaded", function() {
-    const logos = document.querySelectorAll('.logo-item');
-    logos.forEach(function(logo) {
-        logo.addEventListener('mouseover', function() {
-            hoverEffect(logo);
-        });
-        logo.addEventListener('mouseout', function() {
-            removeHoverEffect(logo);
-        });
-    });
-});
-
-
-
-// Slant items click effect
-
-function handleClick(event) {
-    event.style.transform = 'scale(0.9)';
-    event.style.transition = 'transform 1s ease';
-}
-function resetClick(event) {
-    event.style.transform = 'scale(1)';
-}
-
-const slantItems = document.getElementsByClassName('slant-item');
-for (let i = 0; i < slantItems.length; i++) {
-    slantItems[i].onclick = function() {
-        handleClick(this);
-    }
-    slantItems[i].ontransitionend = function() {
-        resetClick(this);
-    }
-}
 
 // Responsive nav toggle
-document.addEventListener('DOMContentLoaded', function() {
-    const navToggle = document.querySelector('.nav-toggle');
-    const header = document.querySelector('header');
-    const siteNav = document.getElementById('site-nav') || document.getElementById('site-nav');
+// Consolidated, cleaned JS for site interactions
+// - Responsive nav toggle
+// - Logo hover animation
+// - Slant items click feedback
+// - Portrait tilt (self-contained IIFE)
+// - Typewriter rotator
 
-    if (!navToggle || !header) return;
-
-    navToggle.addEventListener('click', function(e) {
-        const expanded = this.getAttribute('aria-expanded') === 'true';
-        this.setAttribute('aria-expanded', String(!expanded));
-        header.classList.toggle('nav-open');
-        this.setAttribute('aria-label', expanded ? 'Open menu' : 'Close menu');
-    });
-
-    // Close menu when a nav link is clicked (mobile)
-    const links = header.querySelectorAll('nav a');
-    links.forEach(link => link.addEventListener('click', () => {
-        header.classList.remove('nav-open');
-        if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
-    }));
-
-    // Close when clicking outside the nav
-    document.addEventListener('click', function(e) {
-        if (!header.classList.contains('nav-open')) return;
-        const withinHeader = e.composedPath().includes(header);
-        if (!withinHeader) {
-            header.classList.remove('nav-open');
-            navToggle.setAttribute('aria-expanded', 'false');
-        }
-    });
-});
-
-// Portrait tilt / parallax interaction
+// Portrait tilt / parallax interaction (kept as IIFE)
 (function() {
     const wrap = document.getElementById('portraitWrap');
     if (!wrap) return;
@@ -96,7 +27,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const dx = (x - cx) / cx; // -1 .. 1
         const dy = (y - cy) / cy;
 
-        // limit rotation
         const maxTilt = 8; // degrees
         state.ry = Math.max(Math.min(dx * maxTilt, maxTilt), -maxTilt);
         state.rx = Math.max(Math.min(-dy * maxTilt, maxTilt), -maxTilt);
@@ -121,47 +51,99 @@ document.addEventListener('DOMContentLoaded', function() {
     wrap.addEventListener('touchcancel', onLeave);
 })();
 
-// Typewriter-style rotator for hero paragraph
+// Main DOM-ready setup
 document.addEventListener('DOMContentLoaded', function() {
+    const header = document.querySelector('header');
+    const navToggle = document.querySelector('.nav-toggle');
+
+    // Responsive nav toggle
+    if (navToggle && header) {
+        navToggle.addEventListener('click', function() {
+            const expanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', String(!expanded));
+            header.classList.toggle('nav-open');
+            this.setAttribute('aria-label', expanded ? 'Open menu' : 'Close menu');
+        });
+
+        // Close menu when a nav link is clicked (mobile)
+        const links = header.querySelectorAll('nav a');
+        links.forEach(link => link.addEventListener('click', () => {
+            header.classList.remove('nav-open');
+            navToggle.setAttribute('aria-expanded', 'false');
+        }));
+
+        // Close when clicking outside the nav
+        document.addEventListener('click', function(e) {
+            if (!header.classList.contains('nav-open')) return;
+            if (!e.composedPath().includes(header)) {
+                header.classList.remove('nav-open');
+                navToggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
+
+    // Logo hover effects
+    const logos = document.querySelectorAll('.logo-item');
+    logos.forEach(logo => {
+        logo.addEventListener('mouseenter', () => {
+            logo.style.transform = 'scale(1.25)';
+            logo.style.transition = 'transform 0.3s ease';
+        });
+        logo.addEventListener('mouseleave', () => {
+            logo.style.transform = 'scale(1)';
+        });
+    });
+
+    // Slant items click feedback
+    const slantItems = document.getElementsByClassName('slant-item');
+    for (let i = 0; i < slantItems.length; i++) {
+        slantItems[i].addEventListener('click', function() {
+            this.style.transform = 'scale(0.9)';
+            this.style.transition = 'transform 0.35s ease';
+        });
+        slantItems[i].addEventListener('transitionend', function() {
+            this.style.transform = 'scale(1)';
+        });
+    }
+
+    // Typewriter rotator
     const phrases = ['<Clean Visuals>', '<Strong Hierarchy>', '<Thoughtful Storytelling>'];
     const el = document.querySelector('.rotating-phrase');
-    if (!el) return;
+    if (el) {
+        const typingSpeed = 70;
+        const deletingSpeed = 35;
+        const pauseAfterTyped = 1100;
+        const pauseBetween = 300;
 
-    const typingSpeed = 70; // ms per char
-    const deletingSpeed = 35; // ms per char when deleting
-    const pauseAfterTyped = 1100; // ms to wait after full word
-    const pauseBetween = 300; // ms between delete and next type
+        function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-    function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
-
-    async function typeText(text) {
-        for (let i = 1; i <= text.length; i++) {
-            el.textContent = text.slice(0, i);
-            await sleep(typingSpeed);
+        async function typeText(text) {
+            for (let i = 1; i <= text.length; i++) {
+                el.textContent = text.slice(0, i);
+                await sleep(typingSpeed);
+            }
         }
+
+        async function deleteText() {
+            let current = el.textContent;
+            while (current.length > 0) {
+                current = current.slice(0, -1);
+                el.textContent = current;
+                await sleep(deletingSpeed);
+            }
+        }
+
+        (async function loop() {
+            let idx = 0;
+            el.textContent = '';
+            while (true) {
+                const phrase = phrases[idx];
+                await typeText(phrase);
+                await sleep(pauseAfterTyped);
+                await deleteText();
+                await sleep(pauseBetween);
+                idx = (idx + 1) % phrases.length;
+            }
+        })();
     }
-
-    async function deleteText() {
-        let current = el.textContent;
-        while (current.length > 0) {
-            current = current.slice(0, -1);
-            el.textContent = current;
-            await sleep(deletingSpeed);
-        }
-    }
-
-    // start the loop
-    (async function loop() {
-        let idx = 0;
-        // clear initially so caret shows before typing
-        el.textContent = '';
-        while (true) {
-            const phrase = phrases[idx];
-            await typeText(phrase);
-            await sleep(pauseAfterTyped);
-            await deleteText();
-            await sleep(pauseBetween);
-            idx = (idx + 1) % phrases.length;
-        }
-    })();
 });
