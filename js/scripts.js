@@ -57,6 +57,11 @@
         frame = requestAnimationFrame(() => { applyTransform(); frame = null; });
     }
 
+    // Clear cache on resize since getBoundingClientRect values become invalid
+    window.addEventListener('resize', () => {
+        cachedRect = null;
+    });
+
     wrap.addEventListener('mousemove', onMove);
     wrap.addEventListener('touchmove', onMove, { passive: true });
     wrap.addEventListener('mouseleave', onLeave);
@@ -106,9 +111,13 @@ document.addEventListener('DOMContentLoaded', function() {
             if (slantItem) {
                 slantItem.style.transform = 'scale(0.9)';
                 slantItem.style.transition = 'transform 0.35s ease';
-                setTimeout(() => {
+                
+                // Use transitionend event for precise timing
+                function resetScale() {
                     slantItem.style.transform = 'scale(1)';
-                }, 350);
+                    slantItem.removeEventListener('transitionend', resetScale);
+                }
+                slantItem.addEventListener('transitionend', resetScale);
             }
         });
     }
