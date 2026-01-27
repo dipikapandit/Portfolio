@@ -347,6 +347,19 @@ header.nav-open nav { display: flex; }
 .project-card p { font-size: 14px; color: var(--muted); }
 .project-card:hover { transform: translateY(-6px); }
 
+/* Tags (pills) inside project cards */
+.project-tags { margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
+.tag {
+  display: inline-block;
+  background: rgba(255,255,255,0.03);
+  color: var(--muted);
+  padding: 6px 10px;
+  font-size: 13px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.02);
+}
+.tag:hover { color: var(--text); background: rgba(255,255,255,0.06); }
+
 /* ----------------------------
    9) Footer
    ---------------------------- */
