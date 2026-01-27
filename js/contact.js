@@ -4,24 +4,41 @@
 
 const RECEIVER_EMAIL = 'dipikadidiworks@gmail.com';
 
-		function handleContact(event) {
-			event.preventDefault();
-			const name = document.getElementById('name').value.trim();
-			const email = document.getElementById('email').value.trim();
-			const message = document.getElementById('message').value.trim();
+// Cache DOM elements to avoid repeated queries
+let formElements = null;
 
-			if (!name || !email || !message) return;
+function getFormElements() {
+	if (!formElements) {
+		formElements = {
+			name: document.getElementById('name'),
+			email: document.getElementById('email'),
+			message: document.getElementById('message'),
+			form: document.getElementById('contactForm'),
+			success: document.getElementById('successMsg')
+		};
+	}
+	return formElements;
+}
 
-			const subject = encodeURIComponent(`Portfolio contact from ${name}`);
-			const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+function handleContact(event) {
+	event.preventDefault();
+	const elements = getFormElements();
+	
+	const name = elements.name.value.trim();
+	const email = elements.email.value.trim();
+	const message = elements.message.value.trim();
 
-			// Open the user's default mail client
-			window.location.href = `mailto:${RECEIVER_EMAIL}?subject=${subject}&body=${body}`;
+	if (!name || !email || !message) return;
 
-			// Show a brief success hint (user still needs to send the email in their mail client)
-			const success = document.getElementById('successMsg');
-			success.style.display = 'inline-block';
-			setTimeout(() => { success.style.display = 'none'; }, 6000);
+	const subject = encodeURIComponent(`Portfolio contact from ${name}`);
+	const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
 
-			document.getElementById('contactForm').reset();
-		}
+	// Open the user's default mail client
+	window.location.href = `mailto:${RECEIVER_EMAIL}?subject=${subject}&body=${body}`;
+
+	// Show a brief success hint (user still needs to send the email in their mail client)
+	elements.success.style.display = 'inline-block';
+	setTimeout(() => { elements.success.style.display = 'none'; }, 6000);
+
+	elements.form.reset();
+}

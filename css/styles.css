@@ -180,6 +180,7 @@ header.nav-open nav { display: flex; }
   position: relative; z-index: 2; overflow: hidden; background: none;
   padding: var(--space-xs);
   transform-style: preserve-3d; transition: transform 0.12s cubic-bezier(.2,.9,.2,1), box-shadow 0.12s ease;
+  will-change: transform;
 }
 .portrait-wrap img { width: 100%; height: auto; display: block; object-fit: cover; }
 
@@ -222,9 +223,10 @@ header.nav-open nav { display: flex; }
    6) Tools marquee (logos)
    ---------------------------- */
 .marquee { overflow: hidden; width: 100%; }
-.marquee-track { display: flex; gap: var(--space-lg); align-items: center; animation: marquee 18s linear infinite; }
+.marquee-track { display: flex; gap: var(--space-lg); align-items: center; animation: marquee 18s linear infinite; will-change: transform; }
 .marquee:hover .marquee-track { animation-play-state: paused; }
-.logo-item { flex: 0 0 auto; width: 110px; height: 100px; display: flex; align-items: center; justify-content: center; }
+.logo-item { flex: 0 0 auto; width: 110px; height: 100px; display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease; contain: layout; }
+.logo-item:hover { transform: scale(1.25); }
 .logo-item img { width: 64px; height: 64px; object-fit: contain; filter: invert(1) brightness(2); }
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
@@ -331,8 +333,8 @@ header.nav-open nav { display: flex; }
 .slanted-gallery { padding: var(--space-lg) var(--space-md) var(--space-sm); background: linear-gradient(180deg, rgba(255,213,30,0.02), transparent 30%); }
 .slanted-gallery .section-title { margin-bottom: var(--space-sm); }
 .slant-row { overflow: hidden; transform-origin: left center; margin: var(--space-md) 0; transform: skewY(-4deg); }
-.slant-row .slant-track { display: flex; gap: var(--space-sm); align-items: center; transform: skewY(4deg); animation: slant-move 26s linear infinite; }
-.slant-item { flex: 0 0 auto; width: 300px; height: 400px; overflow: hidden; border-radius: 12px; background: var(--card); box-shadow: 0 8px 30px rgba(0,0,0,0.6); }
+.slant-row .slant-track { display: flex; gap: var(--space-sm); align-items: center; transform: skewY(4deg); animation: slant-move 26s linear infinite; will-change: transform; }
+.slant-item { flex: 0 0 auto; width: 300px; height: 400px; overflow: hidden; border-radius: 12px; background: var(--card); box-shadow: 0 8px 30px rgba(0,0,0,0.6); contain: layout; }
 .slant-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .slant-row.row--rtl .slant-track { animation-direction: reverse; animation-duration: 18s; }
 .slant-row.slow .slant-track { animation-duration: 38s; }
@@ -342,7 +344,7 @@ header.nav-open nav { display: flex; }
    8) Projects grid
    ---------------------------- */
 .projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-md); }
-.project-card { background: var(--card); border-radius: 16px; padding: var(--space-sm); transition: transform 0.3s ease; }
+.project-card { background: var(--card); border-radius: 16px; padding: var(--space-sm); transition: transform 0.3s ease; will-change: transform; contain: layout; }
 .project-card h3 { font-size: 18px; margin-bottom: 8px; padding-top: var(--space-xs); }
 .project-card p { font-size: 14px; color: var(--muted); }
 .project-card:hover { transform: translateY(-6px); }

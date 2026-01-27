@@ -6,6 +6,32 @@ let scores = JSON.parse(localStorage.getItem('scores')) || {
 
       let isAutoPlaying = false;
       let intervalId;
+      let saveTimeout;
+
+      // Cache DOM elements to avoid repeated queries
+      const domCache = {
+        result: null,
+        moves: null,
+        score: null,
+        autoplayButton: null
+      };
+
+      function getDomElement(key, selector) {
+        if (!domCache[key]) {
+          domCache[key] = document.querySelector(selector);
+        }
+        return domCache[key];
+      }
+
+      // Debounced localStorage save to batch writes and reduce blocking
+      function saveScores() {
+        if (saveTimeout) {
+          clearTimeout(saveTimeout);
+        }
+        saveTimeout = setTimeout(() => {
+          localStorage.setItem('scores', JSON.stringify(scores));
+        }, 300); // Batch writes within 300ms window
+      }
 
       function autoplay() {
         if (!isAutoPlaying) {
@@ -23,7 +49,7 @@ let scores = JSON.parse(localStorage.getItem('scores')) || {
       }
 
       function updateAutoplayButton() {
-        const autoplayButton = document.querySelector('.autoplay-button');
+        const autoplayButton = getDomElement('autoplayButton', '.autoplay-button');
 
         if (!autoplayButton) {
           return;
@@ -69,20 +95,20 @@ let scores = JSON.parse(localStorage.getItem('scores')) || {
           scores.ties++ ;
         }
 
-        localStorage.setItem('scores', JSON.stringify(scores));
+        saveScores();
 
         updateScoreElement();
 
-        document.querySelector('.js-result').innerHTML = result;
+        getDomElement('result', '.js-result').innerHTML = result;
 
-        document.querySelector('.js-moves').innerHTML = `You
+        getDomElement('moves', '.js-moves').innerHTML = `You
       <img src="images/${playerMove.toLowerCase()}.png">
       <img src="images/${computerMove.toLowerCase()}.png">
       Computer`;
       }
 
       function updateScoreElement() {
-         document.querySelector('.js-score')
+         getDomElement('score', '.js-score')
             .innerHTML = `Wins: ${scores.wins} Loses: ${scores.losses} Ties: ${scores.ties}`;
       }
 
