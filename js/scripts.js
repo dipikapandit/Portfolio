@@ -13,13 +13,25 @@
     if (!wrap) return;
     let frame;
     const state = { rx: 0, ry: 0, scale: 1 };
+    let cachedRect;
+    let lastCacheTime = 0;
+    const CACHE_DURATION = 100; // Cache rect for 100ms to reduce layout thrashing
 
     function applyTransform() {
         wrap.style.transform = `perspective(800px) rotateX(${state.rx}deg) rotateY(${state.ry}deg) scale(${state.scale})`;
     }
 
+    function getCachedRect() {
+        const now = Date.now();
+        if (!cachedRect || (now - lastCacheTime) > CACHE_DURATION) {
+            cachedRect = wrap.getBoundingClientRect();
+            lastCacheTime = now;
+        }
+        return cachedRect;
+    }
+
     function onMove(e) {
-        const rect = wrap.getBoundingClientRect();
+        const rect = getCachedRect();
         const x = (e.clientX ?? (e.touches && e.touches[0].clientX)) - rect.left;
         const y = (e.clientY ?? (e.touches && e.touches[0].clientY)) - rect.top;
         const cx = rect.width / 2;
@@ -40,9 +52,15 @@
 
     function onLeave() {
         state.rx = 0; state.ry = 0; state.scale = 1;
+        cachedRect = null; // Clear cache
         if (frame) cancelAnimationFrame(frame);
         frame = requestAnimationFrame(() => { applyTransform(); frame = null; });
     }
+
+    // Clear cache on resize since getBoundingClientRect values become invalid
+    window.addEventListener('resize', () => {
+        cachedRect = null;
+    });
 
     wrap.addEventListener('mousemove', onMove);
     wrap.addEventListener('touchmove', onMove, { passive: true });
@@ -82,27 +100,25 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Logo hover effects
-    const logos = document.querySelectorAll('.logo-item');
-    logos.forEach(logo => {
-        logo.addEventListener('mouseenter', () => {
-            logo.style.transform = 'scale(1.25)';
-            logo.style.transition = 'transform 0.3s ease';
-        });
-        logo.addEventListener('mouseleave', () => {
-            logo.style.transform = 'scale(1)';
-        });
-    });
+    // Logo hover effects - moved to CSS for better performance
+    // CSS handles: .logo-item:hover { transform: scale(1.25); }
 
-    // Slant items click feedback
-    const slantItems = document.getElementsByClassName('slant-item');
-    for (let i = 0; i < slantItems.length; i++) {
-        slantItems[i].addEventListener('click', function() {
-            this.style.transform = 'scale(0.9)';
-            this.style.transition = 'transform 0.35s ease';
-        });
-        slantItems[i].addEventListener('transitionend', function() {
-            this.style.transform = 'scale(1)';
+    // Slant items click feedback using event delegation for better performance
+    const slantParent = document.querySelector('.slanted-gallery');
+    if (slantParent) {
+        slantParent.addEventListener('click', function(e) {
+            const slantItem = e.target.closest('.slant-item');
+            if (slantItem) {
+                slantItem.style.transform = 'scale(0.9)';
+                slantItem.style.transition = 'transform 0.35s ease';
+                
+                // Use transitionend event for precise timing
+                function resetScale() {
+                    slantItem.style.transform = 'scale(1)';
+                    slantItem.removeEventListener('transitionend', resetScale);
+                }
+                slantItem.addEventListener('transitionend', resetScale);
+            }
         });
     }
 
