@@ -20,116 +20,45 @@
   </head>
   <body>
 
-    <h1>Calculator</h1>
+    <main class="calculator-root">
+      <h1 class="visually-hidden">Calculator</h1>
 
-    <p class="js-calculation"></p>
+      <div class="calc-display" tabindex="0" aria-live="polite">0</div>
 
-    <div class="calc-container">
+      <div class="calc-keys" role="group" aria-label="Calculator keys">
+        <!-- Row 1 -->
+        <button class="btn btn-clear btn-small" data-action="all-clear">AC</button>
+        <button class="btn btn-clear btn-small" data-action="clear">C</button>
+        <button class="btn btn-small" data-action="paren">( )</button>
+        <button class="btn btn-operator" data-action="/">÷</button>
 
-    <div class="calculator-buttons">
-      <button class="number" onclick="
-        updateCalculation('1');
-        ">1</button>
+        <!-- Row 2 -->
+        <button class="btn btn-number" data-value="7">7</button>
+        <button class="btn btn-number" data-value="8">8</button>
+        <button class="btn btn-number" data-value="9">9</button>
+        <button class="btn btn-operator" data-action="*">×</button>
 
-      <button class="number" onclick="
-        updateCalculation('2');
-        ">2</button>
+        <!-- Row 3 -->
+        <button class="btn btn-number" data-value="4">4</button>
+        <button class="btn btn-number" data-value="5">5</button>
+        <button class="btn btn-number" data-value="6">6</button>
+        <button class="btn btn-operator" data-action="-">−</button>
 
-      <button class="number" onclick="
-        updateCalculation('3');
-        ">3</button>
+        <!-- Row 4 -->
+        <button class="btn btn-number" data-value="1">1</button>
+        <button class="btn btn-number" data-value="2">2</button>
+        <button class="btn btn-number" data-value="3">3</button>
+        <button class="btn btn-operator" data-action="+">+</button>
 
-      <button class="expn" onclick="
-        calculation = calculation.slice(0, -1);
-        showCalculation();
-        ">C</button>  
+        <!-- Row 5 -->
+        <button class="btn btn-number btn-zero" data-value="0">0</button>
+        <button class="btn btn-number" data-value=".">.</button>
+        <button class="btn btn-equal" data-action="equals">=</button>
+      </div>
 
-      <button class="expn" onclick="
-        calculation = '';
-        showCalculation(0);
-        document.querySelector('.js-calculation').innerHTML = 0;
-        ">AC</button>  
-    </div>
-
-    <div class="calculator-buttons">
-      <button class="number" onclick="
-        updateCalculation('4');
-        ">4</button>
-
-      <button class="number" onclick="
-        updateCalculation('5');
-        ">5</button>
-
-      <button class="number" onclick="
-        updateCalculation('6');
-        ">6</button>
-
-        <button class="expn" onclick="
-        updateCalculation(' * ');
-        ">*</button>
-
-      <button class="expn" onclick="
-        updateCalculation(' / ');
-        ">÷</button>
-
-    </div>
-
-    <div class="calculator-buttons">
-      <button class="number" onclick="
-        updateCalculation('7');
-        ">7</button>
-
-      <button class="number" onclick="
-        updateCalculation('8');
-        ">8</button>
-
-      <button class="number" onclick="
-        updateCalculation('9');
-        ">9</button>
-
-         <button class="expn" onclick="
-        updateCalculation(' + ');
-        ">+</button>
-
-      <button class="expn" onclick="
-        updateCalculation(' - ');
-        ">-</button>
-    </div>
-
-
-    <div class="calculator-buttons">
-      <button class="number" onclick="
-        updateCalculation('0');
-        ">0</button>
-
-      <button class="number" onclick="
-        updateCalculation('.');
-        ">.</button>
-
-        <button class="number" onclick="
-          updateCalculation('(');
-        "> ( </button>
-
-        <button class="number" onclick="
-          updateCalculation(')');
-        "> ) </button>
-
-        <button class="equal" onclick="
-          calculation = eval(calculation);
-          
-          showCalculation();
-          ">=</button>  
-
-
-    </div>
-    </div>
-
-
-    <p class="identity">
-      Calculator made by: dipikachu (,,` w `,,)
-    </p>
-
-    <a class="back-link" href="index.html">← Back to Work</a>
+      <p class="identity">Calculator made by: dipikachu (,,` w `,,)</p>
+      <a class="back-link" href="index.html">← Back to Work</a>
+    </main>
 
 
   
@@ -140,25 +69,109 @@
     <div>LinkedIn · Instagram · Email</div>
   </footer>
 
-    <script>  
+    <script>
+      (function () {
+        const display = document.querySelector('.calc-display');
+        const keys = document.querySelector('.calc-keys');
 
-      let calculation = JSON.parse(localStorage.getItem('calculation')) || '';
-      showCalculation();
+        let expression = JSON.parse(localStorage.getItem('calculation')) || '';
 
-      function updateCalculation (num) {
-        calculation += num ;
-        console.log(calculation);
+        function persist() {
+          localStorage.setItem('calculation', JSON.stringify(expression));
+        }
 
-        localStorage.setItem('calculation', JSON.stringify(calculation));
+        function render(val) {
+          display.textContent = val || '0';
+        }
 
-        showCalculation();
+        function safeEval(expr) {
+          // Very small sandbox: allow digits, operators and parentheses only
+          if (!/^[0-9()+\-*/.\s]+$/.test(expr)) throw new Error('Invalid expression');
+          // Use Function instead of eval for slightly safer evaluation
+          return Function('return (' + expr + ')')();
+        }
 
-      }
+        // Initial render
+        render(expression);
 
-      function showCalculation () {
-        document.querySelector('.js-calculation').innerHTML = calculation;
-      }
+        keys.addEventListener('click', (e) => {
+          const btn = e.target.closest('button');
+          if (!btn) return;
 
+          const value = btn.getAttribute('data-value');
+          const action = btn.getAttribute('data-action');
+
+          if (value) {
+            expression += value;
+            persist();
+            render(expression);
+            return;
+          }
+
+          if (!action) return;
+
+          switch (action) {
+            case 'all-clear':
+              expression = '';
+              persist();
+              render(expression);
+              break;
+            case 'clear':
+              expression = expression.slice(0, -1);
+              persist();
+              render(expression);
+              break;
+            case 'paren':
+              // Append an opening paren for simplicity
+              expression += '(';
+              persist();
+              render(expression);
+              break;
+            case 'equals':
+              try {
+                const result = safeEval(expression || '0');
+                expression = String(result);
+                persist();
+                render(expression);
+              } catch (err) {
+                render('Error');
+              }
+              break;
+          }
+        });
+
+        // keyboard support (basic)
+        window.addEventListener('keydown', (e) => {
+          if (e.key >= '0' && e.key <= '9') {
+            expression += e.key;
+            persist();
+            render(expression);
+            return;
+          }
+          if (['+', '-', '*', '/', '(', ')', '.'].includes(e.key)) {
+            expression += e.key;
+            persist();
+            render(expression);
+            return;
+          }
+          if (e.key === 'Backspace') {
+            expression = expression.slice(0, -1);
+            persist();
+            render(expression);
+            return;
+          }
+          if (e.key === 'Enter') {
+            try {
+              const result = safeEval(expression || '0');
+              expression = String(result);
+              persist();
+              render(expression);
+            } catch (err) {
+              render('Error');
+            }
+          }
+        });
+      })();
     </script>
   </body>
 </html>
